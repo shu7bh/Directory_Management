@@ -3,5 +3,6 @@
 
 int main()
 {
+    DirMgt* aliasHead = createNode();
     return 0;
 }

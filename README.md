@@ -1,4 +1,7 @@
-# Directory_Management
+#Directory_Management
 Directory Management to be implemented in c... Group 30
 
-Dummy commit
+Aliasing
+
+Storing all the aliases in a linked list.
+Each alias stores the pointer to the directory.
