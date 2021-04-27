@@ -14,6 +14,6 @@ struct DirMgt
     DirMgt* parent;
 };
 
-typedef DirMgt* HeadDir;
+
 
 #endif
