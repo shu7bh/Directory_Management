@@ -26,23 +26,23 @@ DirMgt *makeFolder()
     return A;
 }
 
-void add(DirMgt *current_dir, char *name_f, int a)
+void add(DirMgt *currentDir, char *nameF, int a)
 {
     DirMgt *A;
-    DirMgt *temp = current_dir;
+    DirMgt *temp = currentDir;
 
-    current_dir = current_dir->firstChild;
-    if(strcmp(current_dir->name,name_f)==0)
+    currentDir = currentDir->firstChild;
+    if(strcmp(currentDir->name,nameF)==0)
     {
         printf("ERROR: name already exists");
         return ;
     }
-    if (current_dir != NULL)
+    if (currentDir != NULL)
     {
-        while (current_dir->sibling != NULL)
+        while (currentDir->sibling != NULL)
         {
-            current_dir = current_dir->sibling;
-            if(strcmp(current_dir->name,name_f)==0)
+            currentDir = currentDir->sibling;
+            if(strcmp(currentDir->name,nameF)==0)
             {
                 printf("ERROR: name already exists");
                 return ;
@@ -61,7 +61,7 @@ void add(DirMgt *current_dir, char *name_f, int a)
         A = makeFile();
     }
 
-    current_dir->sibling = A;
-    strcpy(A->name, name_f);
+    currentDir->sibling = A;
+    strcpy(A->name, nameF);
     A->parent = temp;
 }
