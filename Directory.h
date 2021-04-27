@@ -9,7 +9,7 @@ struct DirMgt
 {
     char name[256];
     bool type;
-    DirMgt* head;
+    DirMgt* firstChild;
     DirMgt* sibling;
     DirMgt* parent;
 };
