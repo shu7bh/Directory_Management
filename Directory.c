@@ -4,7 +4,7 @@
 #include <malloc.h>
 #include "string.h"
 
-DirMgt *mAKEFILE()
+DirMgt *makeFile()
 {
     DirMgt *A;
     A = malloc(sizeof(DirMgt));
@@ -15,7 +15,7 @@ DirMgt *mAKEFILE()
     return A;
 }
 
-DirMgt *mAKEFOLDER()
+DirMgt *makeFolder()
 {
     DirMgt *A;
     A = malloc(sizeof(DirMgt));
@@ -26,7 +26,7 @@ DirMgt *mAKEFOLDER()
     return A;
 }
 
-void aDD(DirMgt *current_dir, char *name_f, int a)
+void add(DirMgt *current_dir, char *name_f, int a)
 {
     DirMgt *A;
     DirMgt *temp = current_dir;
@@ -53,12 +53,12 @@ void aDD(DirMgt *current_dir, char *name_f, int a)
 
     if (a == 1)
     {
-        A = mAKEFOLDER();
+        A = makeFolder();
     }
 
     if (a == 0)
     {
-        A = mAKEFILE();
+        A = makeFile();
     }
 
     current_dir->sibling = A;
