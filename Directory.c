@@ -4,13 +4,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-/*typedef struct Name Name;*/
-/*struct Name*/
-/*{*/
-/*char name[256];*/
-/*Name* next;*/
-/*};*/
-
 bool inputAlias(DirMgt* root, Alias* aliasHead)
 {
     char aliasName[256];
@@ -19,17 +12,31 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
     DirMgt* cur = root;
     int ct = 0;
 
-    while (true)
+    int flag = 1;
+    while (flag)
     {
         char str[260];
-        scanf("%257[^/]s", str);
-
-        if (strlen(str) == 257)
+        char input;
+        int i = 0;
+        while ((input = getchar()))
         {
-            printf("Invalid Name\n");
-            fflush(stdin);
-            return 0;
+            if (input == '/')
+                break;
+            else if (input == '\n')
+            {
+                flag = 0;
+                break;
+            }
+            else
+                str[i++] = input;
+            if (i > 255)
+            {
+                printf("Invalid Name\n");
+                fflush(stdin);
+                return 0;
+            }
         }
+        str[i] = '\0';
 
         if (!ct++)
         {
@@ -42,7 +49,6 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         }
         else
         {
-
             DirMgt* nextDir = findDir(str, cur);
             if (nextDir)
                 cur = nextDir;
@@ -54,6 +60,14 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
             }
         }
     }
+    if (addAlias(aliasHead, aliasName, cur))
+        printf("\nAdded Alias\n");
+    else
+    {
+        printf("Alias already exists\n");
+        return 0;
+    }
+    return 1;
 }
 
 DirMgt* findDir(char* dirName, DirMgt* parentDir)
@@ -63,13 +77,15 @@ DirMgt* findDir(char* dirName, DirMgt* parentDir)
     while (dir && strcmp(dirName, dir->name))
         dir = dir->firstChild; 
 
-    return dir;
+    if (dir)
+        return (dir->type)? dir : NULL;
+    return NULL;
 }
 
 bool addAlias(Alias* aliasHead, char* aliasName, DirMgt* dir)
 {
     Alias* alias = aliasHead;
-    
+
     while (alias->next)
     {
         if (strcmp(alias->name, aliasName) == 0)
@@ -78,53 +94,8 @@ bool addAlias(Alias* aliasHead, char* aliasName, DirMgt* dir)
     }
 
     alias->next = createAlias(aliasName, dir);
-    alias = alias->next;
     return 1;
 }
-
-/*void deleteName(Name** name)*/
-/*{*/
-/*Name* temp = *name;*/
-
-/*while (temp)*/
-/*{*/
-/*Name* del = temp;*/
-/*temp = temp->next;*/
-/*free (del);*/
-/*}*/
-/**name = NULL;*/
-/*}*/
-
-/*Name* dirNames(char* absName)*/
-/*{*/
-/*Name* names = NULL;*/
-/*Name* node = names;*/
-
-/*int len = strlen(absName);*/
-/*char str[260];*/
-/*for (int i = 0, j = 0; i < len; ++i)*/
-/*if (absName[i] != '/' && j < 255)*/
-/*strcat(str, (char*)&absName[i]), ++j;*/
-/*else if (j >= 254)*/
-/*{*/
-/*Name* temp = (Name*) malloc (sizeof (Name));*/
-/*temp->next = NULL;*/
-/*strcpy(temp->name, "");*/
-/*deleteName(&names);*/
-/*return temp;*/
-/*}*/
-/*else*/
-/*{*/
-/*Name* temp = (Name*) malloc (sizeof (Name));*/
-/*strcpy(temp->name, str);*/
-
-/*if (node == NULL)*/
-/*names = node = temp;*/
-/*else*/
-/*node->next = temp, node = node->next;*/
-/*}*/
-/*return names;*/
-/*}*/
 
 Alias* createAlias(char* aliasName, DirMgt* dir)
 {
@@ -136,16 +107,3 @@ Alias* createAlias(char* aliasName, DirMgt* dir)
     node->next = NULL;
     return node;
 }
-
-/*enum state addNewAlias(DirMgt* rootDir, Alias* aliasHead, char* name, char* absName)*/
-/*{*/
-/*Alias* node = aliasHead;*/
-/*while (node->next)*/
-/*if (strcmp(node->next->name, name) == 0)*/
-/*return 1;*/
-
-/*if (!DirExists(rootDir, absName))*/
-/*return 2;*/
-
-/*return 0;*/
-/*}*/
