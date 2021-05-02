@@ -6,8 +6,24 @@
 
 bool inputAlias(DirMgt* root, Alias* aliasHead)
 {
-    char aliasName[256];
-    scanf("%s", aliasName);
+    char aliasName[260];
+
+    char input;
+    int i = 0;
+    while ((input = getchar()))
+    {
+        if (input == ' ')
+            break;
+        
+        aliasName[i++] = input;
+
+        if (i > 255)
+        {
+            printf("Invalid Alias Name\n");
+            fflush(stdin);
+            return 0;
+        }
+    }
 
     DirMgt* cur = root;
     int ct = 0;
