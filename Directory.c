@@ -19,8 +19,8 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
 
         if (i > 255)
         {
-            printf("Invalid Alias Name\n");
-            fflush(stdin);
+            printf("Error: Invalid Alias Name.\n");
+            while ((getchar()) != '\n');
             return 0;
         }
     }
@@ -47,8 +47,8 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
                 str[i++] = input;
             if (i > 255)
             {
-                printf("Invalid Name\n");
-                fflush(stdin);
+                printf("Error: Invalid Name.\n");
+                while ((getchar()) != '\n');
                 return 0;
             }
         }
@@ -58,8 +58,9 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         {
             if (strcmp(root->name, str))
             {
-                printf("Directory does not exist\n");
-                fflush(stdin);
+                printf("Error: Directory does not exist.\n");
+                if (flag)
+                    while ((getchar()) != '\n');
                 return 0;
             }
         }
@@ -70,8 +71,9 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
                 cur = nextDir;
             else 
             {
-                printf("Directory does not exist\n");
-                fflush(stdin);
+                printf("Error: Directory does not exist.\n");
+                if (flag)
+                    while ((getchar()) != '\n');
                 return 0;
             }
         }
@@ -80,7 +82,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         printf("\nAdded Alias\n");
     else
     {
-        printf("Alias already exists\n");
+        printf("Error: Alias already exists.\n");
         return 0;
     }
     return 1;
