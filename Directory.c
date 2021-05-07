@@ -37,12 +37,14 @@ void add(DirMgt *currentDir, char *nameF, int a)
         {
             currentDir->firstChild = makeFolder();
             strcpy(currentDir->firstChild->name, nameF);
+            currentDir->firstChild->parent = currentDir;
         }
 
         if (a == 0)
         {
             currentDir->firstChild = makeFile();
             strcpy(currentDir->firstChild->name, nameF);
+            currentDir->firstChild->parent = currentDir;
         }
         return;
     }
