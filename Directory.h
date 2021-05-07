@@ -14,6 +14,10 @@ struct DirMgt
     DirMgt* parent;
 };
 
-typedef DirMgt* HeadDir;
+DirMgt *makeFile();
+DirMgt *makeFolder();
+void add(DirMgt *currentDir, char *nameF, int a);
+
+#define SIZE 255
 
 #endif
