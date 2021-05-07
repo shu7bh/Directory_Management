@@ -1,2 +1,74 @@
 #include "Directory.h"
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdio.h>
 
+DirMgt* findDir(char* dirName, DirMgt* parentDir)
+{
+    DirMgt* dir = parentDir->firstChild;
+
+    while (dir && strcmp(dirName, dir->name))
+        dir = dir->firstChild; 
+
+    if (dir)
+        return (dir->type)? dir : NULL;
+    return NULL;
+}
+
+bool move(DirMgt* root, DirMgt** current)
+{
+    DirMgt* cur = root;
+    int ct = 0;
+
+    int flag = 1;
+    while (flag)
+    {
+        char str[260];
+        char input;
+        int i = 0;
+        while ((input = getchar()))
+        {
+            if (input == '/')
+                break;
+            else if (input == '\n')
+            {
+                flag = 0;
+                break;
+            }
+            else
+                str[i++] = input;
+            if (i > 255)
+            {
+                printf("Invalid Name\n");
+                fflush(stdin);
+                return 0;
+            }
+        }
+        str[i] = '\0';
+
+        if (!ct++)
+        {
+            if (strcmp(root->name, str))
+            {
+                printf("Directory does not exist\n");
+                fflush(stdin);
+                return 0;
+            }
+        }
+        else
+        {
+            DirMgt* nextDir = findDir(str, cur);
+            if (nextDir)
+                cur = nextDir;
+            else 
+            {
+                printf("Directory does not exist\n");
+                fflush(stdin);
+                return 0;
+            }
+        }
+    }
+
+    *current = cur;
+}

@@ -16,4 +16,7 @@ struct DirMgt
 
 typedef DirMgt* HeadDir;
 
+DirMgt* findDir(char* dirName, DirMgt* parentDir);
+bool move(DirMgt* root, DirMgt** current);
+
 #endif
