@@ -52,7 +52,7 @@ void add(DirMgt *currentDir, char *nameF, int a)
     currentDir = currentDir->firstChild;
     if(strcmp(currentDir->name,nameF)==0)
     {
-        printf("ERROR: name already exists\n");
+        printf("Error: Name already exists\n");
         return ;
     }
     if (currentDir != NULL)
@@ -62,7 +62,7 @@ void add(DirMgt *currentDir, char *nameF, int a)
             currentDir = currentDir->sibling;
             if(strcmp(currentDir->name,nameF)==0)
             {
-                printf("ERROR: name already exists\n");
+                printf("Error: Name already exists\n");
                 return ;
             }
 
