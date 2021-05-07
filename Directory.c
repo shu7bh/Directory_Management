@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include "string.h"
+#include <string.h>
 
 DirMgt *makeFile()
 {
@@ -31,10 +31,26 @@ void add(DirMgt *currentDir, char *nameF, int a)
     DirMgt *A;
     DirMgt *temp = currentDir;
 
+    if (!currentDir->firstChild)
+    {
+        if (a == 1)
+        {
+            currentDir->firstChild = makeFolder();
+            strcpy(currentDir->firstChild->name, nameF);
+        }
+
+        if (a == 0)
+        {
+            currentDir->firstChild = makeFile();
+            strcpy(currentDir->firstChild->name, nameF);
+        }
+        return;
+    }
+
     currentDir = currentDir->firstChild;
     if(strcmp(currentDir->name,nameF)==0)
     {
-        printf("ERROR: name already exists");
+        printf("ERROR: name already exists\n");
         return ;
     }
     if (currentDir != NULL)
@@ -44,10 +60,10 @@ void add(DirMgt *currentDir, char *nameF, int a)
             currentDir = currentDir->sibling;
             if(strcmp(currentDir->name,nameF)==0)
             {
-                printf("ERROR: name already exists");
+                printf("ERROR: name already exists\n");
                 return ;
             }
-            
+
         }
     }
 

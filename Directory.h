@@ -14,6 +14,9 @@ struct DirMgt
     DirMgt* parent;
 };
 
+DirMgt *makeFile();
+DirMgt *makeFolder();
+void add(DirMgt *currentDir, char *nameF, int a);
 
 
 #endif
