@@ -4,6 +4,7 @@
 
 int main()
 {
+    Alias* aliasHead = createAlias("Dummy", NULL);
     DirMgt* root = makeFolder();
     strcpy(root->name, "root");
 
@@ -34,7 +35,7 @@ int main()
         }
         input[i] = 0;
 
-        if (flag == 1 && strcmp(input, "ls"))
+        if (flag == 1 && strcmp(input, "ls") && strcmp(input, "quit"))
         {
             printf("Error: Multi-line commands are not allowed.\n");
             continue;
@@ -122,17 +123,23 @@ int main()
             fileN[i] = 0;
             add(cur, fileN, a);
         }
+        else if (!strcmp(input, "move"))
+        {
+            move(root, &cur);
+        }
         else if (!strcmp(input, "ls"))
         {
             list(cur);
         }
-        else if (!strcmp(input, "move"));
-        else if (!strcmp(input, "teleport"));
-        else if (!strcmp(input, "alias"));
-        else if (!strcmp(input, "find"))
+        else if (!strcmp(input, "teleport"))
         {
-            // dummy commit
+            Teleport(aliasHead, &cur);
         }
+        else if (!strcmp(input, "alias"))
+        {
+            inputAlias(root, aliasHead);
+        }
+        else if (!strcmp(input, "find"));
         else if (!strcmp(input, "quit"))
             break;
         else
