@@ -11,6 +11,8 @@ int main()
     printf("\033[0;37m");
     DirMgt* cur = root;
 
+    man();
+
     char input[10];
     while (true)
     {
@@ -61,6 +63,8 @@ int main()
             find(cur);
         else if (!strcmp(input, "man"))
             man();
+        else if (!strcmp(input, "rd"))
+            relativeDirectory(&cur);
         else if (!strcmp(input, "quit"))
             break;
         else

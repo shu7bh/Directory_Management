@@ -1,9 +1,8 @@
 #include "Directory.h"
 
-bool move(DirMgt* root, DirMgt** current)
+bool relativeDirectory(DirMgt** current)
 {
-    DirMgt* cur = root;
-    int ct = 0;
+    DirMgt* cur = *current;
 
     int flag = 1;
     while (flag)
@@ -36,31 +35,33 @@ bool move(DirMgt* root, DirMgt** current)
             }
         }
         str[i] = '\0';
+        
 
         if (!str[0])
             break;
-        if (!ct++)
+        if (!strcmp(str, ".."))
         {
-            if (strcmp(root->name, str))
+            if (cur->parent)
+                cur = cur->parent;
+            else
             {
                 printError("Error: Directory does not exist.");
                 if (flag)
                     while (getchar() != '\n');
                 return 0;
             }
+            continue;
         }
-        else
+        else if (!strcmp(str, "."));
+        DirMgt* nextDir = findDir(str, cur);
+        if (nextDir)
+            cur = nextDir;
+        else 
         {
-            DirMgt* nextDir = findDir(str, cur);
-            if (nextDir)
-                cur = nextDir;
-            else 
-            {
-                printError("Error: Directory does not exist.");
-                if (flag)
-                    while (getchar() != '\n');
-                return 0;
-            }
+            printError("Error: Directory does not exist.");
+            if (flag)
+                while (getchar() != '\n');
+            return 0;
         }
     }
 
