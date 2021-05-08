@@ -19,6 +19,11 @@ int main()
         char ch;
         int flag = 0;
         int i = 0;
+
+        goToRoot(cur);
+        printf("\033[1;92m");
+        printf("\b$ ");
+        printf("\033[0;37m");
         while ((ch = getchar()))
         {
             if (ch == ' ')

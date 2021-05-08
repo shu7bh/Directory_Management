@@ -22,6 +22,7 @@ DirMgt *makeFile();
 DirMgt *makeFolder();
 DirMgt* findDir(char* dirName, DirMgt* parentDir);
 bool relativeDirectory(DirMgt** current);
+void goToRoot(DirMgt* ptr);
 
 void add(DirMgt *currentDir);
 void list(DirMgt* cur);
