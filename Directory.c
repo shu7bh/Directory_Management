@@ -26,6 +26,23 @@ DirMgt *makeFolder()
     return A;
 }
 
+void list(DirMgt* cur)
+{
+    DirMgt* temp = cur->firstChild;
+
+    while (temp)
+    {
+        if (temp->type)
+            printf("\033[0;35m");
+        else
+            printf("\033[0;32m");
+        printf("%s   ", temp->name);
+        printf("\033[0m");
+        temp = temp->sibling;
+    }
+    printf("\n");
+}
+
 void add(DirMgt *currentDir, char *nameF, int a)
 {
     DirMgt *A;
