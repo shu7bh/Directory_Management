@@ -129,7 +129,10 @@ int main()
         else if (!strcmp(input, "move"));
         else if (!strcmp(input, "teleport"));
         else if (!strcmp(input, "alias"));
-        else if (!strcmp(input, "find"));
+        else if (!strcmp(input, "find"))
+        {
+            // dummy commit
+        }
         else if (!strcmp(input, "quit"))
             break;
         else
