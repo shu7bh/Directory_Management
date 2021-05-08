@@ -279,7 +279,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         }
     }
     if (addAlias(aliasHead, aliasName, cur))
-        printf("\nAdded Alias\n");
+        printf("Added Alias\n");
     else
     {
         printf("Error: Alias already exists.\n");
