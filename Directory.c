@@ -1,8 +1,86 @@
 #include "Directory.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <malloc.h>
 #include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdio.h>
+
+DirMgt* findDir(char* dirName, DirMgt* parentDir)
+{
+    DirMgt* dir = parentDir->firstChild;
+
+    while (dir && strcmp(dirName, dir->name))
+        dir = dir->sibling; 
+
+    if (dir)
+        return (dir->type)? dir : NULL;
+    return NULL;
+}
+
+bool move(DirMgt* root, DirMgt** current)
+{
+    DirMgt* cur = root;
+    int ct = 0;
+
+    int flag = 1;
+    while (flag)
+    {
+        char str[260];
+        char input;
+        int i = 0;
+        while ((input = getchar()))
+        {
+            if (input == '/')
+                break;
+            else if (input == '\n')
+            {
+                flag = 0;
+                break;
+            }
+            else if (input == ' ')
+            {
+                printf("Error: Invalid command - spaces are not allowed.\n");
+                while (getchar() != '\n');
+                return 0;
+            }
+            else
+                str[i++] = input;
+            if (i > 255)
+            {
+                printf("Error: Directory does not exist.\n");
+                while (getchar() != '\n');
+                return 0;
+            }
+        }
+        str[i] = '\0';
+
+        if (!ct++)
+        {
+            if (strcmp(root->name, str))
+            {
+                printf("Error: Directory does not exist.\n");
+                if (flag)
+                    while (getchar() != '\n');
+                return 0;
+            }
+        }
+        else
+        {
+            DirMgt* nextDir = findDir(str, cur);
+            if (nextDir)
+                cur = nextDir;
+            else 
+            {
+                printf("Error: Directory does not exist.\n");
+                if (flag)
+                    while (getchar() != '\n');
+                return 0;
+            }
+        }
+    }
+
+    *current = cur;
+    return 1;
+}
 
 DirMgt *makeFile()
 {

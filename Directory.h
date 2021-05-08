@@ -22,4 +22,7 @@ void list(DirMgt* cur);
 
 #define SIZE 255
 
+DirMgt* findDir(char* dirName, DirMgt* parentDir);
+bool move(DirMgt* root, DirMgt** current);
+
 #endif
