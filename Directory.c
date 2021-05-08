@@ -39,7 +39,7 @@ bool move(DirMgt* root, DirMgt** current)
             }
             else if (input == ' ')
             {
-                printf("Error: Invalid command - spaces are not allowed.\n");
+                printError("Error: Invalid command - spaces are not allowed.");
                 while (getchar() != '\n');
                 return 0;
             }
@@ -47,7 +47,7 @@ bool move(DirMgt* root, DirMgt** current)
                 str[i++] = input;
             if (i > SIZE)
             {
-                printf("Error: Directory does not exist.\n");
+                printError("Error: Directory does not exist.");
                 while (getchar() != '\n');
                 return 0;
             }
@@ -58,7 +58,7 @@ bool move(DirMgt* root, DirMgt** current)
         {
             if (strcmp(root->name, str))
             {
-                printf("Error: Directory does not exist.\n");
+                printError("Error: Directory does not exist.");
                 if (flag)
                     while (getchar() != '\n');
                 return 0;
@@ -71,7 +71,7 @@ bool move(DirMgt* root, DirMgt** current)
                 cur = nextDir;
             else 
             {
-                printf("Error: Directory does not exist.\n");
+                printError("Error: Directory does not exist.");
                 if (flag)
                     while (getchar() != '\n');
                 return 0;
@@ -116,7 +116,7 @@ void list(DirMgt* cur)
         else
             printf("\033[0;32m");
         printf("%s   ", temp->name);
-        printf("\033[0m");
+        printf("\033[0;37m");
         temp = temp->sibling;
     }
     printf("\n");
@@ -148,7 +148,7 @@ void add(DirMgt *currentDir, char *nameF, int a)
     currentDir = currentDir->firstChild;
     if(strcmp(currentDir->name,nameF)==0)
     {
-        printf("Error: Name already exists\n");
+        printError("Error: Name already exists");
         return ;
     }
     if (currentDir != NULL)
@@ -158,7 +158,7 @@ void add(DirMgt *currentDir, char *nameF, int a)
             currentDir = currentDir->sibling;
             if(strcmp(currentDir->name,nameF)==0)
             {
-                printf("Error: Name already exists\n");
+                printError("Error: Name already exists");
                 return ;
             }
 
@@ -206,7 +206,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
 
         if (i > SIZE)
         {
-            printf("Error: Invalid Alias Name.\n");
+            printError("Error: Invalid Alias Name.");
             while ((getchar()) != '\n');
             return 0;
         }
@@ -216,13 +216,13 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
 
     if (error == 1)
     {
-        printf("Error: Alias name cannot start with a space.\n");
+        printError("Error: Alias name cannot start with a space.");
         while ((getchar()) != '\n');
         return 0;
     }
     else if (error == 2)
     {
-        printf("Error: Alias name cannot have a /.\n");
+        printError("Error: Alias name cannot have a /.");
         while ((getchar()) != '\n');
         return 0;
     }
@@ -249,7 +249,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
                 str[i++] = input;
             if (i > SIZE)
             {
-                printf("Error: Invalid Name.\n");
+                printError("Error: Invalid Name.");
                 while ((getchar()) != '\n');
                 return 0;
             }
@@ -260,7 +260,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         {
             if (strcmp(root->name, str))
             {
-                printf("Error: Directory does not exist.\n");
+                printError("Error: Directory does not exist.");
                 if (flag)
                     while ((getchar()) != '\n');
                 return 0;
@@ -273,7 +273,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
                 cur = nextDir;
             else 
             {
-                printf("Error: Directory does not exist.\n");
+                printError("Error: Directory does not exist.");
                 if (flag)
                     while ((getchar()) != '\n');
                 return 0;
@@ -284,7 +284,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         printf("Added Alias\n");
     else
     {
-        printf("Error: Alias already exists.\n");
+        printError("Error: Alias already exists.");
         return 0;
     }
     return 1;
@@ -346,7 +346,7 @@ void Teleport(Alias* aliasHead, DirMgt** Current)
 
         if (i > SIZE)
         {
-            printf("Error: Invalid Alias Name.\n");
+            printError("Error: Invalid Alias Name.");
             while ((getchar()) != '\n');
             return;
         }
@@ -354,13 +354,13 @@ void Teleport(Alias* aliasHead, DirMgt** Current)
 
     if (error == 1)
     {
-        printf("Error: Alias name cannot start with a space.\n");
+        printError("Error: Alias name cannot start with a space.");
         while ((getchar()) != '\n');
         return;
     }
     else if (error == 2)
     {
-        printf("Error: Alias name cannot have a /.\n");
+        printError("Error: Alias name cannot have a /.");
         while ((getchar()) != '\n');
         return;
     }
@@ -374,7 +374,7 @@ void Teleport(Alias* aliasHead, DirMgt** Current)
 
     if(tempAliasHead == NULL)
     {
-        printf("The alias that you entered does not exist");
+        printf("The alias that you entered does not exist\n");
         return;
     }
 
@@ -385,22 +385,28 @@ void goToRoot(DirMgt* ptr)
 {
     if (ptr->parent)
         goToRoot(ptr->parent);
+    if (ptr->type)
+        printf("\033[0;35m");
+    else
+        printf("\033[0;32m");
     printf("%s/", ptr->name);
+    printf("\033[0;37m");
 }
 
-void dfs(DirMgt* cur, char* str)
+void dfs(DirMgt* cur, char* str, int* flag)
 {
     if (!cur)
         return;
 
     if (!strncmp(cur->name, str, strlen(str)))
     {
+        (*flag)++;
         goToRoot(cur);
         printf("\b \n");
     }
 
-    dfs(cur->firstChild, str);
-    dfs(cur->sibling, str);
+    dfs(cur->firstChild, str, flag);
+    dfs(cur->sibling, str, flag);
 }
 
 void find(DirMgt* cur)
@@ -414,8 +420,7 @@ void find(DirMgt* cur)
     {
         if (input == ' ')
         {
-            if (i == 0)
-                error = 1;
+            error = 1;
             break;
         }
         else if (input == '/')
@@ -431,7 +436,7 @@ void find(DirMgt* cur)
 
         if (i > SIZE)
         {
-            printf("Error: No directories or files found.\n");
+            printError("Error: No directories or files found.");
             while ((getchar()) != '\n');
             return;
         }
@@ -439,16 +444,27 @@ void find(DirMgt* cur)
     str[i] = 0;
     if (error == 1)
     {
-        printf("Error: No directories or files found.\n");
+        printError("Error: No directories or files found.");
         while ((getchar()) != '\n');
         return;
     }
     else if (error == 2)
     {
-        printf("Error: No directories or files found.\n");
+        printError("Error: No directories or files found.");
         while ((getchar()) != '\n');
         return;
     }
 
-    dfs(cur, str);
+    int flag = 0;
+    dfs(cur, str, &flag);
+
+    if (!flag)
+        printf("No directories or files found with %s.\n", str);
+}
+
+void printError(char str[100])
+{
+    printf("\033[0;31m");
+    printf("%s\n", str);
+    printf("\033[0;37m");
 }

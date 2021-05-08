@@ -8,6 +8,7 @@ int main()
     DirMgt* root = makeFolder();
     strcpy(root->name, "root");
 
+    printf("\033[0;37m");
     DirMgt* cur = root;
 
     char input[10];
@@ -37,12 +38,12 @@ int main()
 
         if (flag == 1 && strcmp(input, "ls") && strcmp(input, "quit"))
         {
-            printf("Error: Multi-line commands are not allowed.\n");
+            printError("Error: Multi-line commands are not allowe");
             continue;
         }
         if (flag == 2)
         {
-            printf("Error: Invalid command\n");
+            printError("Error: Invalid command");
             while ((getchar()) != '\n');
             continue;
         }
@@ -57,12 +58,12 @@ int main()
                 a = 1;
             else if (type[1] == '\n')
             {
-                printf("Error: Give a valid type.\n");
+                printError("Error: Give a valid type.");
                 continue;
             }
             else
             {
-                printf("Error: Give a valid type.\n");
+                printError("Error: Give a valid type.");
                 while ((getchar()) != '\n');
                 continue;
             }
@@ -74,12 +75,12 @@ int main()
             ch = getchar();
             if (ch == '\n')
             {
-                printf("Error: Give a file/folder name.\n");
+                printError("Error: Give a file/folder name.");
                 continue;
             }
             if (ch != ' ')
             {
-                printf("Error: Give a valid type.\n");
+                printError("Error: Give a valid type.");
                 while ((getchar()) != '\n');
                 continue;
             }
@@ -105,19 +106,19 @@ int main()
 
             if (flag == 1)
             {
-                printf("Error: Trailing whitespaces are not allowed.\n");
+                printError("Error: Trailing whitespaces are not allowed.");
                 while ((getchar()) != '\n');
                 continue;
             }
             else if (flag == 2)
             {
-                printf("Error: Name exceeds 255 characters.\n");
+                printError("Error: Name exceeds 255 characters.");
                 while ((getchar()) != '\n');
                 continue;
             }
             if (i == 0)
             {
-                printf("Error: Give a file/folder name.\n");
+                printError("Error: Give a file/folder name.");
                 continue;
             }
             fileN[i] = 0;
@@ -147,7 +148,7 @@ int main()
             break;
         else
         {
-            printf("Error: Invalid Command.\n");
+            printError("Error: Invalid Command.");
             while ((getchar()) != '\n');
         }
     }
