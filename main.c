@@ -4,6 +4,7 @@
 
 int main()
 {
+    Alias* aliasHead = createAlias("Dummy", NULL);
     DirMgt* root = makeFolder();
     strcpy(root->name, "root");
 
@@ -131,7 +132,10 @@ int main()
             list(cur);
         }
         else if (!strcmp(input, "teleport"));
-        else if (!strcmp(input, "alias"));
+        else if (!strcmp(input, "alias"))
+        {
+            inputAlias(root, aliasHead);
+        }
         else if (!strcmp(input, "find"));
         else if (!strcmp(input, "quit"))
             break;
