@@ -76,6 +76,8 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         }
         str[i] = '\0';
 
+        if (!str[0])
+            break;
         if (!ct++)
         {
             if (strcmp(root->name, str))

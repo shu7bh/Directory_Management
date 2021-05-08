@@ -21,6 +21,7 @@ struct DirMgt
 DirMgt *makeFile();
 DirMgt *makeFolder();
 DirMgt* findDir(char* dirName, DirMgt* parentDir);
+bool relativeDirectory(DirMgt** current);
 
 void add(DirMgt *currentDir);
 void list(DirMgt* cur);

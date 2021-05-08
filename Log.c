@@ -18,7 +18,7 @@ void man()
 {
     printf("\n\n-----------------------------------------Man Page----------------------------------------\n\n");
     printf("Main Commands\n");
-    printf(" - Add\n - Move\n - Alias\n - Teleport\n - Find\n - List\n - Help\n");
+    printf(" - Add\n - Move\n - Alias\n - Teleport\n - Find\n - List\n - Relative Directory\n - Help\n");
     printf("\n\nAdd\n");
     printf("\tTo add a file in the current directory\n\t$add fi <File Name>\n");
     printf("\n\tTo add a folder in the current directory\n\t$add fo <Folder Name>\n");
@@ -38,6 +38,10 @@ void man()
     printf("\n\nList\n");
     printf("\tTo print all the files and folders in the current directory\n");
     printf("\t$ls");
+    printf("\n\nRelative Directory\n");
+    printf("\n\tTo change the directory using the relative path to the new directory\n");
+    printf("\t$rd <Path Name>\n");
+    printf("\nNote: '..' refers to the parent directory and '.' refers to the current directory path\n");
     printf("\n\nHelp\n");
     printf("\tHelp to run commands\n");
     printf("\t$man\n");
