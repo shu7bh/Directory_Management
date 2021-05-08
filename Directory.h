@@ -2,6 +2,9 @@
 #define __DIRECTORY_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define SIZE 255
 
@@ -19,7 +22,7 @@ DirMgt *makeFile();
 DirMgt *makeFolder();
 DirMgt* findDir(char* dirName, DirMgt* parentDir);
 
-void add(DirMgt *currentDir, char *nameF, int a);
+void add(DirMgt *currentDir);
 void list(DirMgt* cur);
 bool move(DirMgt* root, DirMgt** current);
 void find(DirMgt* cur);
