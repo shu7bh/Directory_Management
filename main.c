@@ -139,7 +139,10 @@ int main()
         {
             inputAlias(root, aliasHead);
         }
-        else if (!strcmp(input, "find"));
+        else if (!strcmp(input, "find"))
+        {
+            find(cur);
+        }
         else if (!strcmp(input, "quit"))
             break;
         else

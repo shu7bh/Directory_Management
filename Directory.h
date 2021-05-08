@@ -22,6 +22,7 @@ DirMgt* findDir(char* dirName, DirMgt* parentDir);
 void add(DirMgt *currentDir, char *nameF, int a);
 void list(DirMgt* cur);
 bool move(DirMgt* root, DirMgt** current);
+void find(DirMgt* cur);
 
 typedef struct Alias Alias;
 

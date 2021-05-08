@@ -380,3 +380,75 @@ void Teleport(Alias* aliasHead, DirMgt** Current)
 
     *Current = tempAliasHead->dir;
 }
+
+void goToRoot(DirMgt* ptr)
+{
+    if (ptr->parent)
+        goToRoot(ptr->parent);
+    printf("%s/", ptr->name);
+}
+
+void dfs(DirMgt* cur, char* str)
+{
+    if (!cur)
+        return;
+
+    if (!strncmp(cur->name, str, strlen(str)))
+    {
+        goToRoot(cur);
+        printf("\b \n");
+    }
+
+    dfs(cur->firstChild, str);
+    dfs(cur->sibling, str);
+}
+
+void find(DirMgt* cur)
+{
+    char str[SIZE + 5];
+    char input;
+    int i = 0;
+    int error = 0;
+
+    while ((input = getchar()))
+    {
+        if (input == ' ')
+        {
+            if (i == 0)
+                error = 1;
+            break;
+        }
+        else if (input == '/')
+        {
+            error = 2;
+            break;
+        }
+
+        else if(input == '\n')
+            break;
+
+        str[i++] = input;
+
+        if (i > SIZE)
+        {
+            printf("Error: No directories or files found.\n");
+            while ((getchar()) != '\n');
+            return;
+        }
+    }
+    str[i] = 0;
+    if (error == 1)
+    {
+        printf("Error: No directories or files found.\n");
+        while ((getchar()) != '\n');
+        return;
+    }
+    else if (error == 2)
+    {
+        printf("Error: No directories or files found.\n");
+        while ((getchar()) != '\n');
+        return;
+    }
+
+    dfs(cur, str);
+}
