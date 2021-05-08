@@ -212,6 +212,8 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         }
     }
 
+    aliasName[i] = 0;
+
     if (error == 1)
     {
         printf("Error: Alias name cannot start with a space.\n");
@@ -312,4 +314,69 @@ Alias* createAlias(char* aliasName, DirMgt* dir)
     node->dir = dir;
     node->next = NULL;
     return node;
+}
+
+void Teleport(Alias* aliasHead, DirMgt** Current)
+{
+    Alias* tempAliasHead = aliasHead;
+    char aliasName[SIZE];
+    char input;
+    int i = 0;
+    int error = 0;
+
+    while ((input = getchar()))
+    {
+        if (input == ' ')
+        {
+            if (i == 0)
+                error = 1;
+            break;
+        }
+        else if (input == '/')
+        {
+            error = 2;
+            break;
+        }
+        
+        else if(input == '\n')
+        {
+            break;
+        }
+        aliasName[i++] = input;
+
+        if (i > SIZE)
+        {
+            printf("Error: Invalid Alias Name.\n");
+            while ((getchar()) != '\n');
+            return;
+        }
+    }
+
+    if (error == 1)
+    {
+        printf("Error: Alias name cannot start with a space.\n");
+        while ((getchar()) != '\n');
+        return;
+    }
+    else if (error == 2)
+    {
+        printf("Error: Alias name cannot have a /.\n");
+        while ((getchar()) != '\n');
+        return;
+    }
+
+    aliasName[i] = 0;
+    // Searches in the linked list for the required alias name
+    while(tempAliasHead != NULL && strcmp(tempAliasHead->name, aliasName) != 0)
+    {
+        tempAliasHead = tempAliasHead->next;
+    }
+
+    if(tempAliasHead == NULL)
+    {
+        printf("The alias that you entered does not exist");
+        return;
+    }
+
+    *Current = tempAliasHead->dir;
 }

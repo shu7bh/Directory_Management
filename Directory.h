@@ -24,6 +24,7 @@ void list(DirMgt* cur);
 bool move(DirMgt* root, DirMgt** current);
 
 typedef struct Alias Alias;
+
 struct Alias
 {
     char name[SIZE + 1];
@@ -34,5 +35,6 @@ struct Alias
 bool inputAlias(DirMgt* root, Alias* aliasHead); // To input alias from the user
 Alias* createAlias(char* aliasName, DirMgt* dir); // To create an empty node of the DirMgt structure
 bool addAlias(Alias* aliasHead, char* aliasName, DirMgt* dir);
+void Teleport(Alias* aliasHead, DirMgt** Current);
 
 #endif
