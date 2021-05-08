@@ -1,4 +1,5 @@
 #include "Directory.h"
+#include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -24,7 +25,7 @@ bool move(DirMgt* root, DirMgt** current)
     int flag = 1;
     while (flag)
     {
-        char str[260];
+        char str[SIZE];
         char input;
         int i = 0;
         while ((input = getchar()))
@@ -44,7 +45,7 @@ bool move(DirMgt* root, DirMgt** current)
             }
             else
                 str[i++] = input;
-            if (i > 255)
+            if (i > SIZE)
             {
                 printf("Error: Directory does not exist.\n");
                 while (getchar() != '\n');
@@ -181,23 +182,47 @@ void add(DirMgt *currentDir, char *nameF, int a)
 
 bool inputAlias(DirMgt* root, Alias* aliasHead)
 {
-    char aliasName[260];
+    char aliasName[SIZE + 5];
 
     char input;
     int i = 0;
+    int error = 0;
+
     while ((input = getchar()))
     {
         if (input == ' ')
+        {
+            if (i == 0)
+                error = 1;
             break;
+        }
+        else if (input == '/')
+        {
+            error = 2;
+            break;
+        }
         
         aliasName[i++] = input;
 
-        if (i > 255)
+        if (i > SIZE)
         {
             printf("Error: Invalid Alias Name.\n");
             while ((getchar()) != '\n');
             return 0;
         }
+    }
+
+    if (error == 1)
+    {
+        printf("Error: Alias name cannot start with a space.\n");
+        while ((getchar()) != '\n');
+        return 0;
+    }
+    else if (error == 2)
+    {
+        printf("Error: Alias name cannot have a /.\n");
+        while ((getchar()) != '\n');
+        return 0;
     }
 
     DirMgt* cur = root;
@@ -206,7 +231,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
     int flag = 1;
     while (flag)
     {
-        char str[260];
+        char str[SIZE];
         char input;
         int i = 0;
         while ((input = getchar()))
@@ -220,7 +245,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
             }
             else
                 str[i++] = input;
-            if (i > 255)
+            if (i > SIZE)
             {
                 printf("Error: Invalid Name.\n");
                 while ((getchar()) != '\n');
@@ -269,7 +294,7 @@ bool addAlias(Alias* aliasHead, char* aliasName, DirMgt* dir)
 
     while (alias->next)
     {
-        if (strcmp(alias->name, aliasName) == 0)
+        if (!strcmp(alias->next->name, aliasName))
             return 0;
         alias = alias->next;
     }
