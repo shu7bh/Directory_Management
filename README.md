@@ -8,15 +8,15 @@ If you do not have make installed then you will have to install it by using your
 
 ## Commands
 
-- Add
-- Move
-- Alias
-- Teleport
-- Find
-- Find All
-- List
-- Relative Directory
-- Help
+- [Add](#add)
+- [Move](#move)
+- [Alias](#alias)
+- [Teleport](#teleport)
+- [Find](#find)
+- [Find All](#find-all)
+- [List](#list)
+- [Relative Directory](#relative-directory)
+- [Help](#help)
 
 **Note: Pls don't write file/folder/alias/path names in angular brackets <>. They are just to show the syntax.**
 
