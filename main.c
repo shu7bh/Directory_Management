@@ -11,7 +11,7 @@ int main()
     printf("\033[0;37m");
     DirMgt* cur = root;
 
-    man();
+    man(0);
 
     char input[10];
     while (true)
@@ -43,7 +43,7 @@ int main()
         }
         input[i] = 0;
 
-        if (flag == 1 && strcmp(input, "ls") && strcmp(input, "quit") && strcmp(input, "man"))
+        if (flag == 1 && strcmp(input, "ls") && strcmp(input, "quit") && strcmp(input, "man") && strcmp(input, "clear"))
         {
             printError("Error: Multi-line commands are not allowed.");
             continue;
@@ -69,11 +69,13 @@ int main()
         else if (!strcmp(input, "findall"))
             find(cur, 1);
         else if (!strcmp(input, "man"))
-            man();
+            man(!flag);
         else if (!strcmp(input, "rd"))
             relativeDirectory(&cur);
         else if (!strcmp(input, "quit"))
             break;
+        else if (!strcmp(input, "clear"))
+            system("clear");
         else
         {
             printError("Error: Invalid Command.");
