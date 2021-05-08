@@ -12,23 +12,35 @@ void goToRoot(DirMgt* ptr)
     printf("\033[0;37m");
 }
 
-void dfs(DirMgt* cur, char* str, int* flag)
+void dfs(DirMgt* cur, char* str, int* flag, int showAll)
 {
     if (!cur)
         return;
 
-    if (!strncmp(cur->name, str, strlen(str)))
+    if (showAll)
     {
-        (*flag)++;
-        goToRoot(cur);
-        printf("\b \n");
+        if (strstr(cur->name, str))
+        {
+            (*flag)++;
+            goToRoot(cur);
+            printf("\b \n");
+        }
+    }
+    else
+    {
+        if (!strncmp(cur->name, str, strlen(str)))
+        {
+            (*flag)++;
+            goToRoot(cur);
+            printf("\b \n");
+        }
     }
 
-    dfs(cur->firstChild, str, flag);
-    dfs(cur->sibling, str, flag);
+    dfs(cur->firstChild, str, flag, showAll);
+    dfs(cur->sibling, str, flag, showAll);
 }
 
-void find(DirMgt* cur)
+void find(DirMgt* cur, int showAll)
 {
     char str[SIZE + 5];
     char input;
@@ -75,7 +87,7 @@ void find(DirMgt* cur)
     }
 
     int flag = 0;
-    dfs(cur, str, &flag);
+    dfs(cur, str, &flag, showAll);
 
     if (!flag)
     {

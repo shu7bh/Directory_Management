@@ -18,7 +18,7 @@ void man()
 {
     printf("\n\n-----------------------------------------Man Page----------------------------------------\n\n");
     printf("Main Commands\n");
-    printf(" - Add\n - Move\n - Alias\n - Teleport\n - Find\n - List\n - Relative Directory\n - Help\n");
+    printf(" - Add\n - Move\n - Alias\n - Teleport\n - Find\n - Find All\n - List\n - Relative Directory\n - Help\n");
     printf("\n\nAdd\n");
     printf("\tTo add a file in the current directory\n\t$add fi <File Name>\n");
     printf("\n\tTo add a folder in the current directory\n\t$add fo <Folder Name>\n");
@@ -35,6 +35,11 @@ void man()
     printf("\n\nFind\n");
     printf("\tTo Find through all the files and folders in a directory\n");
     printf("\t$find <String To Find>\n");
+    printf("\nNote: Strings cannot have spaces in them");
+    printf("\n\nFind All\n");
+    printf("\tTo Find through all the files and folders in a directory which have \n\tany substring of theirs matching the string used to search it\n");
+    printf("\t$findall <String To Find>\n");
+    printf("\nNote: Strings cannot have spaces in them");
     printf("\n\nList\n");
     printf("\tTo print all the files and folders in the current directory\n");
     printf("\t$ls");

@@ -60,7 +60,9 @@ int main()
         else if (!strcmp(input, "alias"))
             inputAlias(root, aliasHead);
         else if (!strcmp(input, "find"))
-            find(cur);
+            find(cur, 0);
+        else if (!strcmp(input, "findall"))
+            find(cur, 1);
         else if (!strcmp(input, "man"))
             man();
         else if (!strcmp(input, "rd"))
