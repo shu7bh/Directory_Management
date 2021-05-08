@@ -26,6 +26,7 @@ void add(DirMgt *currentDir);
 void list(DirMgt* cur);
 bool move(DirMgt* root, DirMgt** current);
 void find(DirMgt* cur);
+void man();
 
 void printError(char str[100]);
 void printMessage(char str[100]);

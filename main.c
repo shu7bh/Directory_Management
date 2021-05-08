@@ -36,14 +36,14 @@ int main()
         }
         input[i] = 0;
 
-        if (flag == 1 && strcmp(input, "ls") && strcmp(input, "quit"))
+        if (flag == 1 && strcmp(input, "ls") && strcmp(input, "quit") && strcmp(input, "man"))
         {
-            printError("Error: Multi-line commands are not allowe");
+            printError("Error: Multi-line commands are not allowed.");
             continue;
         }
         if (flag == 2)
         {
-            printError("Error: Invalid command");
+            printError("Error: Invalid command.");
             while ((getchar()) != '\n');
             continue;
         }
@@ -59,6 +59,8 @@ int main()
             inputAlias(root, aliasHead);
         else if (!strcmp(input, "find"))
             find(cur);
+        else if (!strcmp(input, "man"))
+            man();
         else if (!strcmp(input, "quit"))
             break;
         else
