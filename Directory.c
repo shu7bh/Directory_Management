@@ -281,7 +281,7 @@ bool inputAlias(DirMgt* root, Alias* aliasHead)
         }
     }
     if (addAlias(aliasHead, aliasName, cur))
-        printf("Added Alias\n");
+        printMessage("Added Alias");
     else
     {
         printError("Error: Alias already exists.");
@@ -374,7 +374,7 @@ void Teleport(Alias* aliasHead, DirMgt** Current)
 
     if(tempAliasHead == NULL)
     {
-        printf("The alias that you entered does not exist\n");
+        printMessage("The alias that you entered does not exist");
         return;
     }
 
@@ -459,12 +459,23 @@ void find(DirMgt* cur)
     dfs(cur, str, &flag);
 
     if (!flag)
-        printf("No directories or files found with %s.\n", str);
+    {
+        char message[300];
+        sprintf(message, "No directories or files found with %s.", str);
+        printMessage(message);
+    }
 }
 
 void printError(char str[100])
 {
     printf("\033[0;31m");
+    printf("%s\n", str);
+    printf("\033[0;37m");
+}
+
+void printMessage(char str[100])
+{
+    printf("\033[0;36m");
     printf("%s\n", str);
     printf("\033[0;37m");
 }

@@ -25,6 +25,7 @@ bool move(DirMgt* root, DirMgt** current);
 void find(DirMgt* cur);
 
 void printError(char str[100]);
+void printMessage(char str[100]);
 
 typedef struct Alias Alias;
 
