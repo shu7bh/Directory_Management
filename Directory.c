@@ -9,7 +9,7 @@ DirMgt* findDir(char* dirName, DirMgt* parentDir)
     DirMgt* dir = parentDir->firstChild;
 
     while (dir && strcmp(dirName, dir->name))
-        dir = dir->firstChild; 
+        dir = dir->sibling; 
 
     if (dir)
         return (dir->type)? dir : NULL;
@@ -36,11 +36,17 @@ bool move(DirMgt* root, DirMgt** current)
                 flag = 0;
                 break;
             }
+            else if (input == ' ')
+            {
+                printf("Error: Invalid command - spaces are not allowed.\n");
+                while (getchar() != '\n');
+                return 0;
+            }
             else
                 str[i++] = input;
             if (i > 255)
             {
-                printf("Error: Invalid Name.\n");
+                printf("Error: Directory does not exist.\n");
                 while (getchar() != '\n');
                 return 0;
             }
