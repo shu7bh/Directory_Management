@@ -2,7 +2,7 @@
 
 ## How to Compile
 
-To compile the code run the command "make a" in your terminal.
+To compile the code run the command `make a` in your terminal.
 
 If you do not have make installed then you will have to install it by using your package manager.
 
