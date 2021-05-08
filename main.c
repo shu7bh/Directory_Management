@@ -131,7 +131,10 @@ int main()
         {
             list(cur);
         }
-        else if (!strcmp(input, "teleport"));
+        else if (!strcmp(input, "teleport"))
+        {
+            Teleport(aliasHead, &cur);
+        }
         else if (!strcmp(input, "alias"))
         {
             inputAlias(root, aliasHead);
