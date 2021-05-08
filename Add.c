@@ -3,6 +3,7 @@
 void add(DirMgt *currentDir)
 {
     char type[5];
+    type[0] = type[1] = type[2] = 0;
     scanf(" %2c", type);
 
     int a = 0;
