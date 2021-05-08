@@ -18,6 +18,8 @@ DirMgt *makeFile();
 DirMgt *makeFolder();
 void add(DirMgt *currentDir, char *nameF, int a);
 
+void list(DirMgt* cur);
+
 #define SIZE 255
 
 DirMgt* findDir(char* dirName, DirMgt* parentDir);

@@ -34,7 +34,7 @@ int main()
         }
         input[i] = 0;
 
-        if (flag == 1)
+        if (flag == 1 && strcmp(input, "ls"))
         {
             printf("Error: Multi-line commands are not allowed.\n");
             continue;
@@ -125,6 +125,10 @@ int main()
         else if (!strcmp(input, "move"))
         {
             move(root, &cur);
+        }
+        else if (!strcmp(input, "ls"))
+        {
+            list(cur);
         }
         else if (!strcmp(input, "teleport"));
         else if (!strcmp(input, "alias"));
