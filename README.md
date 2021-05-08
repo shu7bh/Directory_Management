@@ -18,6 +18,8 @@ If you do not have make installed then you will have to install it by using your
 - Relative Directory
 - Help
 
+**Note: Pls don't write file/folder/alias/path names in angular brackets <>. They are just to show the syntax.**
+
 ### Add
 
 To add a file in the current directory
@@ -62,7 +64,7 @@ To print all the files and folders in the current directory
 ### Relative Directory
 
 To change the directory using the relative path to the new directory
-```$rd \<Path Name>```
+```$rd <Path Name>```
 
 _Note: '..' refers to the parent directory and '.' refers to the current directory path_
 
