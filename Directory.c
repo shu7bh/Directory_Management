@@ -40,8 +40,8 @@ bool move(DirMgt* root, DirMgt** current)
                 str[i++] = input;
             if (i > 255)
             {
-                printf("Invalid Name\n");
-                fflush(stdin);
+                printf("Error: Invalid Name.\n");
+                while (getchar() != '\n');
                 return 0;
             }
         }
@@ -51,8 +51,9 @@ bool move(DirMgt* root, DirMgt** current)
         {
             if (strcmp(root->name, str))
             {
-                printf("Directory does not exist\n");
-                fflush(stdin);
+                printf("Error: Directory does not exist.\n");
+                if (flag)
+                    while (getchar() != '\n');
                 return 0;
             }
         }
@@ -63,14 +64,16 @@ bool move(DirMgt* root, DirMgt** current)
                 cur = nextDir;
             else 
             {
-                printf("Directory does not exist\n");
-                fflush(stdin);
+                printf("Error: Directory does not exist.\n");
+                if (flag)
+                    while (getchar() != '\n');
                 return 0;
             }
         }
     }
 
     *current = cur;
+    return 1;
 }
 
 DirMgt *makeFile()

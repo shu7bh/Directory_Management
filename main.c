@@ -122,7 +122,10 @@ int main()
             fileN[i] = 0;
             add(cur, fileN, a);
         }
-        else if (!strcmp(input, "move"));
+        else if (!strcmp(input, "move"))
+        {
+            move(root, &cur);
+        }
         else if (!strcmp(input, "teleport"));
         else if (!strcmp(input, "alias"));
         else if (!strcmp(input, "find"));
