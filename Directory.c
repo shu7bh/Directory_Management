@@ -1,5 +1,7 @@
 #include "Directory.h"
 
+// Finds if a directory is present as the immediate subdirectory of the parent directory
+// The finding is done through a simple name search since the names are distinct in a given directory
 DirMgt* findDir(char* dirName, DirMgt* parentDir)
 {
     DirMgt* dir = parentDir->firstChild;
@@ -12,6 +14,7 @@ DirMgt* findDir(char* dirName, DirMgt* parentDir)
     return NULL;
 }
 
+// Makes a file
 DirMgt *makeFile()
 {
     DirMgt *A;
@@ -23,6 +26,7 @@ DirMgt *makeFile()
     return A;
 }
 
+// Makes a folder
 DirMgt *makeFolder()
 {
     DirMgt *A;
@@ -34,14 +38,16 @@ DirMgt *makeFolder()
     return A;
 }
 
+// Lists all the files and directories present in a directory
+// It is colour coded. Purple represents folders, green represents files
 void list(DirMgt* cur)
 {
     DirMgt* temp = cur->firstChild;
 
-    while (temp)
+    while (temp) // Used to iterate through all the siblings
     {
         if (temp->type)
-            printf("\033[0;35m");
+            printf("\033[0;35m"); // This printf function is used to change the colours
         else
             printf("\033[0;32m");
         printf("%s   ", temp->name);

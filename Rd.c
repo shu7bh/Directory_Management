@@ -1,12 +1,15 @@
 #include "Directory.h"
 
+// To move to the relative directory
+// Complete path doesn't work with this feature
 bool relativeDirectory(DirMgt** current)
 {
     DirMgt* cur = *current;
 
-    int flag = 1;
+    int flag = 1; // To check if user has completed entering the relative path for the directory
     while (flag)
     {
+        // To input the relative directory one directory at a time
         char str[SIZE];
         char input;
         int i = 0;
@@ -35,15 +38,14 @@ bool relativeDirectory(DirMgt** current)
             }
         }
         str[i] = '\0';
-        
 
-        if (!str[0])
+        if (!str[0]) // To handle if the user enters a / at the end of the path
             break;
-        if (!strcmp(str, ".."))
+        if (!strcmp(str, "..")) // To go the parent directory
         {
             if (cur->parent)
                 cur = cur->parent;
-            else
+            else // If you are already on the root directory
             {
                 printError("Error: Directory does not exist.");
                 if (flag)
@@ -52,11 +54,12 @@ bool relativeDirectory(DirMgt** current)
             }
             continue;
         }
-        else if (!strcmp(str, "."));
-        DirMgt* nextDir = findDir(str, cur);
+        else if (!strcmp(str, ".")) // Since we are already in the current directory, it does not do anything
+            continue;
+        DirMgt* nextDir = findDir(str, cur); // Checks if the directory is present
         if (nextDir)
             cur = nextDir;
-        else 
+        else  // The directory is not present
         {
             printError("Error: Directory does not exist.");
             if (flag)
@@ -65,6 +68,6 @@ bool relativeDirectory(DirMgt** current)
         }
     }
 
-    *current = cur;
+    *current = cur; // Changes where the directory points to
     return 1;
 }

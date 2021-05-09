@@ -1,6 +1,7 @@
+# The makefile
 CC = gcc
 
-TARGET = dirMgt
+TARGET = Dolphin
 
 $(TARGET):
 	$(CC) -o $(TARGET) *.c

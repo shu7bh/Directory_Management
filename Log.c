@@ -1,5 +1,10 @@
 #include "Directory.h"
 
+// Log.c file is to just print the messages and errors prettily
+//
+// The colour for an error is orange/red
+// The colour for a message is light blue
+
 void printError(char str[100])
 {
     printf("\033[0;31m");
@@ -14,12 +19,16 @@ void printMessage(char str[100])
     printf("\033[0;37m");
 }
 
+// The main commands which get printed at the start and also when the user enters man
 void mainCommands()
 {
     printf("\nMain Commands\n");
-    printf(" - Add\n - Move\n - Alias\n - Teleport\n - Find\n - Find All\n - List\n - Relative Directory\n - Clear\n - Help\n");
-    printf("\n\tMan pages are available for each command. They can be run as\n\t$man <Command Name>\n");
+    printf(" - Add\t\t\t\t<add>\n - Move\t\t\t\t<move>\n - Alias\t\t\t<alias>\n - Teleport\t\t\t<teleport>\n - Find\t\t\t\t<find>\n - Find All\t\t\t<findall>\n - List\t\t\t\t<ls>\n - Relative Directory\t\t<rd>\n - Clear\t\t\t<clear>\n");
+    printf("\n\tTo get the man page\n\t$man\n");
+    printf("\n\tTo get the man page for a specific command\n\t$man <Command Name>\n");
 }
+
+// The following are the man commands for the specific command
 
 void logAdd()
 {
@@ -88,6 +97,7 @@ void logClear()
     printf("\t$clear\n");
 }
 
+// The man command which gets called by the main function when man is typed
 void man(int check)
 {
     printf("\n\n-----------------------------------------Man Page----------------------------------------\n");
@@ -95,6 +105,7 @@ void man(int check)
         mainCommands();
     else
     {
+        // To take the input if the user is typing a specific man command
         char input[10];
         char ch;
         int flag = 0;
@@ -119,6 +130,9 @@ void man(int check)
         }
         input[i] = 0;
 
+        // To call the specific function which the user enters
+        // And to handle the errors
+        
         if (flag)
             printError("Error: Invalid man command.");
         else if (!strcmp(input, "add"))
